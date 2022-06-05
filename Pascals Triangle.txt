@@ -1,0 +1,24 @@
+class Solution {
+    public List<List<Integer>> generate(int n) {
+        List<List<Integer>> arr=new ArrayList<List<Integer>>();
+         
+        List<Integer> row,prev=null;
+        for(int i=0;i<n;i++){
+            row=new ArrayList<>();
+             for(int j=0;j<=i;j++){
+                 if(j==0 || j==i){ // 1st or last col has 1
+                     row.add(1);
+                 }
+                 else{
+                     row.add(prev.get(j-1)+prev.get(j)); 
+                 }
+                  
+             }
+            prev=row;
+             arr.add(row);
+        }
+        return arr;
+    }
+}
+Time Complexity-O(n^2)
+space Complexity-O(n^2)

@@ -1,0 +1,44 @@
+class Solution {
+    public void nextPermutation(int[] arr) {
+        
+        int size=arr.length; /// 1 3 5 4 2 traverse from back and find first index i such that (down for loop)
+         
+        int i;
+        for(i=size-2;i>=0;i--){
+            if(arr[i]<arr[i+1]){ // this......
+                break;
+            }
+        }
+        int index=0;
+        if(i>=0)
+            
+        {
+        
+        for(int j=size-1;j>i;j--){
+            if(arr[j]>arr[i]){
+                index=j;
+                break;
+            }
+        }
+           swap(arr,index,i); 
+            reverse(arr,i+1,size-1);
+        }
+        else{
+            reverse(arr,0,size-1);
+        }
+    }
+    
+    public void swap(int a[],int i,int j){
+        int t=a[i];
+        a[i]=a[j];
+        a[j]=t;
+    }
+    public void reverse(int a[],int i,int j){
+        while(i<j){
+            swap(a,i++,j--);
+        }
+    }
+    
+}
+Time complexity-O(n)
+space complexity-O(1)
