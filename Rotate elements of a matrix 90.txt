@@ -1,0 +1,58 @@
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+
+public class Solution {
+    public static void rotateMatrix(ArrayList<ArrayList<Integer>> matrix, int n, int m) {
+       int row=0;
+        int col=0;
+        int lastcol=m;
+        int lastrow=n;
+        int prev,curr=0;
+        while(row<lastrow && col<lastcol){
+            if(row+1==lastrow || col+1==lastcol)break;
+            prev=matrix.get(row+1).get(col);
+            for(int j=col;j<lastcol;j++){
+                curr=matrix.get(row).get(j);
+                matrix.get(row).set(j,new Integer(prev));
+                prev=curr;
+            }
+            row++;
+            for(int j=row;j<lastrow;j++){
+                curr=matrix.get(j).get(lastcol-1);
+                matrix.get(j).set(lastcol-1,new Integer(prev));
+                prev=curr;
+            }
+            lastcol--;
+            if(row<lastrow){
+                for(int j=lastcol-1;j>=col;j--){
+                    curr=matrix.get(lastrow-1).get(j);
+                  matrix.get(lastrow-1).set(j,new Integer(prev));
+                    prev=curr;
+                    
+                }
+                 
+            }
+             lastrow--;
+            if(col<lastcol){
+                for(int j=lastrow-1;j>=row;j--){
+                    curr=matrix.get(j).get(col);
+                    matrix.get(j).set(col,new Integer(prev));
+                    prev=curr;
+                }
+                
+            }
+             col++;    
+            
+            
+            
+        }
+        
+        
+    }
+}
+
+
+
+TC-(O(n^2));
+SC-O(1);
