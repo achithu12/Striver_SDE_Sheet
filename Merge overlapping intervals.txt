@@ -1,0 +1,59 @@
+import java.util.* ;
+import java.io.*; 
+/*******************************************************
+
+    Following is the Interval class structure
+
+    class Interval {
+        int start, int finish;
+
+        Interval(int start, int finish) {
+            this.start = start;
+            this.finish = finish;
+        }
+    }
+    
+*******************************************************/
+
+import java.util.List;
+import java.util.ArrayList;
+
+public class Solution {
+    public static List<Interval> mergeIntervals(Interval[] arr) {
+        Arrays.sort(arr,(a,b)->{
+         
+            return a.start-b.start;
+        });
+        
+        Interval temp=arr[0];
+        List<Interval> ans=new ArrayList<>();
+        for(int i=0;i<arr.length;i++){
+               int st=temp.start;
+            int fin=temp.finish;
+            int curr_st=arr[i].start;
+            int curr_fin=arr[i].finish;
+ 
+            if(curr_st<=fin){
+                
+                int finish=Math.max(fin,curr_fin);
+                temp=new Interval(st,finish);
+            }
+            else{
+              
+                ans.add(temp);
+                temp=new Interval(curr_st,curr_fin);
+            }
+        }
+        ans.add(temp);
+        
+        return ans;
+        
+        
+        
+    }
+}
+
+
+
+Time complexity=O(nlogn)+O(n)
+space complexity-O(N)-(returning list)
