@@ -1,0 +1,47 @@
+public class Solution {
+    static long merge(long arr[],long temp[],int l,int m,int r){
+            int i=l;
+            int j=m;
+            int k=l;
+            long inv=0;
+            while(i<=m-1 && j<=r){
+                if(arr[i]<=arr[j]){
+                    temp[k++]=arr[i++];
+                }
+                else{
+                    temp[k++]=arr[j++];
+                    inv+=(m-i);
+                }
+            }
+            while(i<=m-1){
+                temp[k++]=arr[i++];
+                
+            }
+            while(j<=r){
+                temp[k++]=arr[j++];
+            }
+            for(int p=l;p<=r;p++){
+                arr[p]=temp[p];
+            }
+            return inv;
+        }
+         static long mergesort(long arr[],long temp[],int left,int right){
+             long inv=0;
+             int mid;
+             if(right>left){
+                 mid=(left+right)/2;
+             	 inv+=mergesort(arr,temp,left,mid);
+                 inv+=mergesort(arr,temp,mid+1,right);
+                 inv+=merge(arr,temp,left,mid+1,right);
+                 }
+             return inv;
+         }
+    public static long getInversions(long arr[], int n) {
+         long temp[]=new long[n];
+       long count=mergesort(arr,temp,0,n-1);
+        return count;
+    }
+}
+
+Time complexity-O(n logn)
+space complexity-O(n)

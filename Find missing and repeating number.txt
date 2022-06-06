@@ -1,0 +1,69 @@
+import java.util.ArrayList;
+
+public class Solution {
+
+    public static int[] missingAndRepeating(ArrayList<Integer> arr, int n) {
+        int xor=0;
+        for(int i:arr){
+            xor=xor^i;
+        }
+        for(int i=1;i<=n;i++){
+            xor=xor^i;
+        }
+        int set=xor & ~(xor-1);
+        int x=0;
+        int y=0;
+        
+        for(int i=0;i<n;i++){
+            if((set & arr.get(i)) !=0){
+                x=x^arr.get(i);
+            }
+            else{
+                y=y^arr.get(i);
+            }
+        }
+        for(int i=1;i<=n;i++){
+            if((set & i)!=0){
+                x=x^i;
+            }
+            else{
+                y=y^i;
+            }
+        }
+        
+        for(int i:arr){
+            if(i==x){
+                return new int[]{y,x};
+            }
+            if(i==y){
+                return new int[]{x,y};
+            }
+        }
+        return new int[]{};
+        
+        
+        
+        
+        
+    }
+}
+
+
+
+
+
+
+
+/////////////////////////////////////////
+1> do xor for all the array elements // initialize xor=0;
+2>now do xor with xor and all numbers from 1 to n
+3>we get x^y=num
+4> separate them into 2 buckets by checking the set bit of num (if bit is 1) check for all numbers at that index whether it is set or not
+5>now separate the numbers from 1 to n
+6>now xor the same buckets so that we remove the numbers and get missing and repeating numbers
+//////////////////////////////////////////////////////////
+
+
+
+Tc-O(N)
+Sc-O(1)
