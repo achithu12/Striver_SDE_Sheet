@@ -1,0 +1,37 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+	public static int findMajority(int[] arr, int n) {
+		int major=-1;
+        int count=0;
+        for(int i=0;i<n;i++){
+            if(count==0){
+                major=arr[i];
+               
+            }
+             if(major==arr[i]){
+                count+=1;
+            }
+            else{
+                
+                    count=count-1;
+                
+            }
+        }
+        int t=0;
+        for(int i=0;i<n;i++){
+            if(arr[i]==major){
+                t+=1;
+            }
+        }
+        if(t>Math.floor(n/2)){
+            return major;
+        }
+        return -1;
+        
+        
+	}
+}
+
+Tc-O(n)
+sc-O(1)
