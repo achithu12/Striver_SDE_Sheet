@@ -1,0 +1,28 @@
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        if(nums.length==0) return 0;
+        if(nums.length==1) return 1;
+         int maxi=0;
+        Set<Integer> s=new HashSet<>();
+        for(int i: nums){
+            s.add(i);
+        }
+        for(int i=0;i<nums.length;i++){
+            int less=nums[i]-1;
+             
+             
+            if(!s.contains(less)){
+                int great=nums[i]+1;
+                int count=1;
+                while(s.contains(great)){
+                    count+=1;
+                    great+=1;
+                }
+                maxi=Math.max(maxi,count); 
+            }
+        }
+        return maxi;
+    }
+}
+Tc=O(3*N) for pushing into hashset, interating and then again while loop...
+Sc=O(n)
