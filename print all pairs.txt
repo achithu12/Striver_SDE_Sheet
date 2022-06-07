@@ -1,0 +1,97 @@
+import java.util.* ;
+import java.io.*; 
+class pair{
+    int n1;
+    int n2;
+    pair(int n,int k){
+        n1=n;
+        n2=k;
+    }
+     
+    
+}
+public class Solution{
+    public static int[][] pairSum(int[] arr, int s1) {
+ 
+         HashMap<Integer,
+            Integer> mp = new HashMap<Integer,
+                                      Integer>();
+ List<pair> s=new ArrayList<>();
+    
+        int n=arr.length;
+        int sum=s1;
+    for(int i = 0; i < n; i++)
+    {
+         
+         
+        int rem = sum - arr[i];
+        if (mp.containsKey(rem))
+        {
+            int count = mp.get(rem);
+             
+            for(int j = 0; j < count; j++)
+            {
+                if(rem>arr[i]){
+                    s.add(new pair(arr[i],rem));
+                }
+                else{
+               s.add(new pair(rem,arr[i]));
+                }
+            }
+                
+        }
+        if (mp.containsKey(arr[i]))
+        {
+            mp.put(arr[i], mp.get(arr[i]) + 1);
+        }
+        else
+        {
+            mp.put(arr[i], 1);
+        }
+    }
+        int ans[][]=new int[s.size()][2];
+        int ind=0;
+           for(pair i: s){
+         ans[ind][0]=i.n1;
+         ans[ind][1]=i.n2;
+         ind++;
+     }
+        Arrays.sort(ans,(a,b)->{
+            if(a[0]==b[0]) return a[1]-b[1];
+            return a[0]-b[0];
+        });
+        return ans;
+        
+        
+        
+        
+    }
+}
+
+
+Tc-O(n+c)
+sc-O(n)
+
+
+/////////////////////////////////////
+print one pair with given sum
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        int res[]=new int[2];
+        Map<Integer,Integer> mp=new HashMap<>();
+        for(int i=0;i<nums.length;i++){
+            if(mp.containsKey(target-nums[i])){
+                res[1]=i;
+                res[0]=mp.get(target-nums[i]);
+                return res;
+            }
+            else{
+                mp.put(nums[i],i);
+            }
+        }
+        return res;
+    }
+}
+
+Tc-O(N)
+sc-O(N)
