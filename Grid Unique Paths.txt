@@ -1,0 +1,59 @@
+Dynamic approach -
+class Solution {
+    public int dfs(int i,int j,int m,int n,int arr[][]){
+         
+        
+         
+        if(i==m-1 && j==n-1){
+            return 1;
+        }
+        if(i>=m || j>=n){
+            return 0;
+            
+        }
+        if(arr[i][j]!=-1){
+            return arr[i][j];
+        }
+         
+         return arr[i][j]=dfs(i+1,j,m,n,arr)+dfs(i,j+1,m,n,arr);
+        
+    }
+    
+    public int dfs_util(int i,int j,int m,int n){
+        int arr[][]=new int[m][n];
+        for(int k=0;k<m;k++){
+            for(int p=0;p<n;p++){
+                arr[k][p]=-1;
+            }
+        }
+         
+        int ans=dfs(i,j,m,n,arr);
+        
+            return ans;
+    }
+    
+    
+    public int uniquePaths(int m, int n) {
+      return   dfs_util(0,0,m,n);
+    }
+}
+time and space complexity-O(n*m)
+
+
+///////////////////////////////////////////////////////////
+Combinations approach-
+
+m+n-2 c (m-1)or(n-1) gives answer
+class Solution {
+    public int uniquePaths(int m, int n) {
+        int N=m+n-2;
+        double res=1;
+        int r=n-1;
+        for(int i=1;i<=r;i++){
+            res=res*(N-r+i)/i;
+        }
+        return (int)res;
+    }
+}
+Time complexity-O(n-1) or O(m-1)
+space complexity-O(1)
