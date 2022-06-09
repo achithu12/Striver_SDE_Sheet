@@ -1,0 +1,33 @@
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+
+public class Solution {
+	public static int subarraysXor(ArrayList<Integer> arr, int x) {
+		 int count=0;
+        int xor=0;
+        Map<Integer, Integer> map=new HashMap<>();
+        for(int i=0;i<arr.size();i++){
+            xor=xor^arr.get(i);
+            if(xor==x){
+                count+=1;
+            }
+            
+            int ele=xor^x;
+             int k=map.getOrDefault(ele,0);
+            count+=k;
+            if(map.containsKey(xor)){
+                
+                 
+                 map.put(xor,map.get(xor)+1);
+            }
+            else{
+                map.put(xor,1);
+            }
+        }
+        return count;
+	}
+}
+
+Tc-O(nlogn)
+Sc-O(n) 
