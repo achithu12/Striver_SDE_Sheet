@@ -1,0 +1,97 @@
+//1st solution
+public class Solution {
+    static LinkedListNode addTwoNumbers(LinkedListNode head1, LinkedListNode head2) {
+         int carry=0;
+         StringBuilder str=new StringBuilder();
+        while(head1!=null && head2!=null){
+            String k=""+(head1.data+head2.data+carry);
+            carry=0;
+            if(k.length()>1){
+                carry=Integer.parseInt(""+k.charAt(0));
+                str.append(k.charAt(1));
+            }
+            else{
+                str.append(k.charAt(0));
+            }
+            head1=head1.next;
+            head2=head2.next;
+        }
+        //str.reverse();
+        while(head1!=null){
+            String k=""+(head1.data+carry);
+            carry=0;
+            if(k.length()>1){
+                carry=Integer.parseInt(""+k.charAt(0));
+                str.append(k.charAt(1));
+            }
+            else{
+                str.append(k.charAt(0));
+            }
+            head1=head1.next;
+        }
+        while(head2!=null){
+            String k=""+(head2.data+carry);
+            carry=0;
+            if(k.length()>1){
+                carry=Integer.parseInt(""+k.charAt(0));
+                str.append(k.charAt(1));
+            }
+            else{
+                str.append(k.charAt(0));
+            }
+            head2=head2.next;
+        }
+        if(carry==1){
+            str.append("1");
+        }
+        LinkedListNode ans=new LinkedListNode(Integer.parseInt(""+str.charAt(0)));
+        LinkedListNode dummy=ans;
+        for(int i=1;i<str.length();i++){
+            LinkedListNode  t=new LinkedListNode(Integer.parseInt(""+str.charAt(i)));
+            ans.next=t;
+            ans=ans.next;
+        }
+        return dummy;
+        
+        
+        
+    }
+}
+
+
+
+//////////////////////////////////////////////////
+second solution--
+
+
+public class Solution {
+    static LinkedListNode addTwoNumbers(LinkedListNode head1, LinkedListNode head2) {
+         int carry=0;
+         
+        LinkedListNode ans=new LinkedListNode(0);
+        LinkedListNode temp=ans;
+        while(head1!=null || head2!=null || carry==1){
+            int sum=0;
+            if(head1!=null){
+                sum+=head1.data;
+                head1=head1.next;
+            }
+            if(head2!=null){
+                sum+=head2.data;
+                head2=head2.next;
+            }
+            sum+=carry;
+            carry=sum/10;
+            LinkedListNode t1=new LinkedListNode(sum%10);
+            temp.next=t1;
+            temp=temp.next;
+        }
+        return ans.next;
+        
+        
+        
+    }
+}
+
+Tc-O(max(n1,n2))
+sc-O(n1+n2)

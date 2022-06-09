@@ -1,0 +1,43 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+
+	public static ArrayList<ArrayList<Integer>> findTriplets(int[] arr, int n, int K)  {
+
+	    ArrayList<ArrayList<Integer>> ans=new ArrayList<ArrayList<Integer>>();
+        Arrays.sort(arr);
+        for(int i=0;i<n;i++)
+        {
+            if(i==0 || (i>0 && arr[i]!=arr[i-1])){
+            int sum=K-arr[i];
+            int low=i+1;
+            int high=n-1;
+            while(low<high){
+                if(arr[low]+arr[high]>sum){
+                    high--;
+                }
+                else if(arr[low]+arr[high]<sum){
+                    low++;
+                }
+                else{
+                    ArrayList<Integer> res=new ArrayList<>();
+                    res.add(arr[i]);
+                    res.add(arr[low]);
+                    res.add(arr[high]);
+                    ans.add(res);
+                    while(low<high && arr[low]==arr[low+1])++low;
+                    while(low<high && arr[high]==arr[high-1])--high;
+                    low++;
+                    high--;
+                }
+            }
+            }
+            
+        }
+        return ans;
+         
+	}
+}
+
+Tc-O(n*n)
+Sc-O(1)
