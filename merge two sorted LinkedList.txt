@@ -1,0 +1,52 @@
+
+Recursive Solution-
+public class Solution {
+	public static LinkedListNode<Integer> sortTwoLists(LinkedListNode<Integer> first, LinkedListNode<Integer> second) {	    if(first==null&& second==null) return null;
+    if(first==null) return second;
+    if(second==null) return first;
+    if(first.data < second.data){
+        first.next = sortTwoLists(first.next, second);
+        return first;
+    }else{
+        second.next = sortTwoLists(first,second.next);
+        return second;
+    }
+	}
+}
+
+
+////////////////////////////////////
+Iterative Solution-
+public class Solution {
+	public static LinkedListNode<Integer> sortTwoLists(LinkedListNode<Integer> first, LinkedListNode<Integer> second) {
+	 if(first==null && second==null) return null;
+        if(first==null )return second;
+        if(second==null) return first;
+        if(first.data>second.data){
+            LinkedListNode temp=first;
+            first=second;
+            second=temp;
+        }
+        LinkedListNode res=first;
+        while(first!=null && second!=null){
+            LinkedListNode temp=null;
+            while(first!=null && first.data<=second.data){
+                temp=first;
+                first=first.next;
+            }
+            temp.next=second;
+            LinkedListNode t1=first;
+            first=second;
+            second=t1;
+        }
+        
+        return res;
+        
+        
+         
+    }
+}
+
+
+Tc-O(n1+n2)
+sc-O(1)
