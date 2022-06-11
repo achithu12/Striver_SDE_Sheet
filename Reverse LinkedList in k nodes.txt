@@ -1,0 +1,50 @@
+public class Solution {
+	public static Node getListAfterReverseOperation(Node head, int n, int b[]) {
+		 if(head==null || n==0) return head; 
+        Node dummy=new Node(0);
+        dummy.next=head;
+        Node prev=dummy;
+        Node curr=dummy;
+        Node nex=dummy;
+        curr=curr.next;
+        int total=0;
+        while(curr!=null){
+            total+=1;
+            curr=curr.next;
+        }
+        int ind=0;
+        while(ind<n && total>b[ind]){
+            if(b[ind]==0){
+                ind++;
+            continue;
+            }
+            curr=prev.next;
+            nex=curr.next;
+            for(int i=1;i<b[ind];i++){
+                curr.next=nex.next;
+                nex.next=prev.next;
+                prev.next=nex;
+                nex=curr.next;    
+            }
+           prev=curr;
+            total-=b[ind];
+                ind++;  
+        }
+        if(ind<n){
+          curr=prev.next;
+            nex=curr.next;
+            for(int i=1;i<total;i++){
+                curr.next=nex.next;
+                nex.next=prev.next;
+                prev.next=nex;
+                nex=curr.next;    
+            }
+        }
+        return dummy.next;
+         
+	}
+}
+
+
+TC-O(n)
+SC-O(1)

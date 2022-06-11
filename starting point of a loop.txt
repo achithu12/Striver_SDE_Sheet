@@ -1,0 +1,35 @@
+public class Solution 
+{
+    public static Node firstNode(Node head) 
+    {
+        if(head==null || head.next==null) return null;
+        Node slow=head;
+        Node fast=head;
+        int flag=0;
+        while(fast!=null &&fast.next!=null ){
+             slow=slow.next;
+            fast=fast.next.next; 
+            if(slow==fast){
+                flag=1;
+                break;
+            }
+            
+        }
+        if(flag==1){
+            Node dummy=head;
+            
+            
+            while(dummy!=slow){
+                dummy=dummy.next;
+                slow=slow.next;
+                 
+              
+            }
+            return slow;
+        }
+    return null;
+       
+    }
+}
+Tc-O(n)
+sc-O(1)
