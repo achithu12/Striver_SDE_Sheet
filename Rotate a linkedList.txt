@@ -1,0 +1,35 @@
+public class Solution {
+     public static Node rotate(Node head, int k) {
+ 
+      if(k==0 || head==null ||head.next==null) return head;
+        int count=0;
+         Node t=head;
+         while(t!=null){
+             t=t.next;
+             count+=1;
+         }
+          k=k%count;
+         int len=count-k;
+         Node t1=head;
+         int c=1;
+         while(c!=len){
+             t1=t1.next;
+             c=c+1;
+         }
+         if(t1.next==null)return head;
+         Node dummy=t1.next;
+         Node ans=dummy;
+         t1.next=null;
+         while(dummy!=null && dummy.next!=null){
+             dummy=dummy.next;
+         }
+         dummy.next=head;
+         return ans;
+         
+    }
+}
+
+Tc-O(n)
+Sc-O(1)
+
+
