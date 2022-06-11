@@ -1,0 +1,47 @@
+public class Solution {
+    public static Node merge(Node t1,Node t2){
+        Node dummy=new Node(0);
+        Node res=dummy;
+        while(t1!=null && t2!=null){
+            if(t1.data<t2.data){
+                dummy.child=t1;
+                 dummy=dummy.child;
+                t1=t1.child;
+                
+            }
+            else{
+                dummy.child=t2;
+                t2=t2.child;
+                dummy=dummy.child;
+            }
+        }
+        if(t1!=null){
+            dummy.child=t1;
+        }
+        if(t2!=null){
+            dummy.child=t2;
+        }
+        res.next=null;
+        return res.child;
+        
+        
+    }
+    public static Node find(Node start){
+        if(start==null){
+            return start;
+        }
+       Node t1= find(start.next);
+       Node ans= merge(t1,start);
+        return ans;
+    }
+    
+    
+	public static Node flattenLinkedList(Node start) {
+		 return find(start);
+	}
+}
+
+
+TC-O(n) n=total number of nodes
+Sc-O(1)
+
