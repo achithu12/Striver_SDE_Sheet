@@ -1,0 +1,33 @@
+public class Solution
+{
+    public static int jobScheduling(int[][] jobs)
+    {
+         List<pair> arr=new ArrayList<>();
+        for(int i=0;i<jobs.length;i++){
+            arr.add(new pair(jobs[i][0],jobs[i][1]));
+        }
+        Collections.sort(arr,(a,b)->{
+          return  b.profit-a.profit;
+        });
+        int n=arr.size();
+        int vis[]=new int[3000];
+        int ans=0;
+        for(int i=0;i<arr.size();i++){
+            int d=arr.get(i).dead;
+            for(int j=d;j>0;j--){
+                if(vis[j]==0){
+                    vis[j]=1;
+                    ans+=arr.get(i).profit;
+                    break;
+                }
+            }
+        }
+        return ans;
+        
+        
+            
+    }
+}
+
+Tc-O(nlogn)+O(n*m)
+Sc-O(maxi(deadlines))
