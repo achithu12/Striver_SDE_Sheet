@@ -1,0 +1,37 @@
+import java.util.*;
+class pair{
+    int s;
+    int e;
+    pair(int st,int end){
+        s=st;
+        e=end;
+    }
+}
+public class Solution {
+    public static int maximumActivities(List<Integer> start, List<Integer> end) {
+         List<pair> l=new ArrayList<>();
+        for(int i=0;i<start.size();i++){
+            l.add(new pair(start.get(i),end.get(i)));
+        }
+        Collections.sort(l,(a,b)->{
+            return a.e-b.e;
+        });
+           
+        int count=0;
+        int st=l.get(0).s;
+        int ed=l.get(0).e;
+        for(int i=1;i<l.size();i++){
+            if(ed<=l.get(i).s){
+              
+                count+=1;
+                st=l.get(i).s;
+                ed=l.get(i).e;
+            } 
+        }
+        return count+1;
+        
+        
+    }
+}
+Tc-O(n)
+Sc-O(n)
