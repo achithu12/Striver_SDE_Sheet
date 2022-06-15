@@ -1,0 +1,36 @@
+class Solution {
+    
+    public void string_find(List<List<String>> ans,List<String> ds,int ind,String s){
+        if(ind==s.length()){
+            ans.add(new ArrayList<>(ds));
+            return;
+        }
+        
+        for(int i=ind;i<s.length();i++){
+            if(ispal(ind,i,s)==true){
+                ds.add(s.substring(ind,i+1));
+                string_find(ans,ds,i+1,s);
+                ds.remove(ds.size()-1);
+            }
+            
+        }
+    }
+    public boolean ispal(int ind,int i,String s){
+        while(ind<=i){
+            if(s.charAt(ind++)!=s.charAt(i--)) return false;
+        }
+        return true;
+    }
+    
+    
+    public List<List<String>> partition(String s) {
+        List<List<String>> ans=new ArrayList<List<String>>();
+        
+        List<String> ds=new ArrayList<>();
+        string_find(ans,ds,0,s);
+        return ans;
+        
+    }
+}
+Tc-O(2^N)
+sc-O(N)
