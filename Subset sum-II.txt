@@ -1,0 +1,29 @@
+class Solution {
+    public void sum_find(int[]nums,int index,List<List<Integer>> ans,List<Integer> ds){
+        ans.add(new ArrayList(ds));
+        for(int i=index;i<nums.length;i++){
+            
+            
+            if(i!=index && nums[i]==nums[i-1]) continue;
+            ds.add(nums[i]);
+            sum_find(nums,i+1,ans,ds);
+            ds.remove(ds.size()-1);
+            
+        }
+          
+    }
+    
+    
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        List<List<Integer>> ans=new ArrayList<List<Integer>>();
+        Arrays.sort(nums);
+        int n=nums.length;
+        sum_find(nums,0,ans,new ArrayList<>());
+        return ans;
+        
+    }
+}
+}
+Approximately-
+tc-O(2^n)
+sc-O(2^n)
