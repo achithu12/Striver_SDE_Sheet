@@ -1,0 +1,75 @@
+class Solution {
+    
+    public void permut(int arr[],ArrayList<Integer> ds,ArrayList<List<Integer>> ans,int maps[]){
+        
+        if(ds.size()==arr.length){
+            ans.add(new ArrayList<>(ds));
+            return;
+        }
+        for(int i=1;i<=arr.length;i++){
+            if(maps[i]==-1){
+                maps[i]=i;
+                ds.add(arr[i-1]);
+                permut(arr,ds,ans,maps);
+                ds.remove(ds.size()-1);
+                maps[i]=-1;
+                
+            }
+        }
+        
+        
+        
+        
+        
+        
+    }
+    public List<List<Integer>> permute(int[] nums) {
+        ArrayList<List<Integer>> ans=new ArrayList<List<Integer>>();
+        int map[]=new int[nums.length+1];
+        for(int i=1;i<=nums.length;i++){
+            map[i]=-1;
+        }
+        permut(nums,new ArrayList<Integer>(),ans,map);
+        return ans;
+        
+    }
+}
+Tc-O(n! *n)
+sc-O(n)+O(n)
+
+//////////////////////////////////////////////////////////////////////////
+import java.util.*;
+public class Solution {
+    public static void find(char arr[],List<String> ans,int ind){
+       
+        if(ind==arr.length){
+            ans.add(String.valueOf(arr));
+            return ;
+        }
+        
+        for(int i=ind;i<arr.length;i++){
+            
+                char temp=arr[i];
+                arr[i]=arr[ind];
+                 arr[ind]=temp;
+                 
+                find(arr,ans,ind+1);
+                   char t=arr[i];
+                arr[i]=arr[ind];
+                 arr[ind]=t;
+                 
+            
+        }
+        
+    }
+    public static List<String> findPermutations(String s) {
+         List<String> ans=new ArrayList<>();
+         
+        StringBuilder a=new StringBuilder();
+         find(s.toCharArray(),ans,0);
+        return ans;
+    }
+}
+
+Tc-O(n!*n)
+Sc-O(1) (recursion O(n))
