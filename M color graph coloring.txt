@@ -1,0 +1,36 @@
+public class Solution {
+    public static boolean isPossible(int mat[][],int color[],int i,int ind){
+        for(int k=0;k<mat[ind].length;k++){
+            if(mat[ind][k]==1){
+                if(color[k]==i){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    public static String find(int mat[][],int m,int color[],int ind){
+        if(ind==mat.length){
+            return "YES";
+        }
+        for(int i=1;i<=m;i++)
+        {
+            if(isPossible(mat,color,i,ind)==true){
+                color[ind]=i;
+                if(find(mat,m,color,ind+1)=="YES"){
+                    return "YES";
+                }
+                else{
+                    color[ind]=0;
+                }
+            }
+        }
+        return "NO";
+    }
+	public static String graphColoring(int[][] mat, int m) {
+		int color[]=new int[mat.length];
+        	return find(mat,m,color,0);
+	}
+}
+Tc-O(n^m)-> n-> nodes,m-> colors
+Sc-O(1)
