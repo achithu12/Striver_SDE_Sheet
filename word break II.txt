@@ -1,0 +1,31 @@
+class Solution {
+    public List<String> ans=new ArrayList<>();
+    public void find(String s,List<String> words,int ind,List<String> temp){
+        if(ind==s.length()){
+            String t="";
+          for(int i=0;i<temp.size()-1;i++){
+              t+=temp.get(i)+" ";
+          }
+            t+=temp.get(temp.size()-1);
+            ans.add(t);
+            return;
+        }
+        String str="";
+        for(int i=ind;i<s.length();i++){
+            str+=s.charAt(i);
+            if(words.contains(str)){
+                temp.add(str);
+                find(s,words,i+1,temp);
+                temp.remove(temp.size()-1);
+            }
+            
+        }
+    }
+    public List<String> wordBreak(String s, List<String> wordDict) {
+        find(s,wordDict,0,new ArrayList<>());
+        return ans;
+    }
+}
+
+Tc-O(n*2^n)
+Sc-O(n)
