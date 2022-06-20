@@ -1,0 +1,29 @@
+public class Solution {
+    public static double find(double k,int n){
+         double ans = 1.0;
+    for(int i = 1;i<=n;i++) {
+        ans = ans * k;
+    }
+    return ans; 
+    }
+     public static double findNthRootOfM(int n, long m) {
+      double low = 1;
+    double high = m+1;
+    double eps = 1e-8; 
+    
+    while((high - low) > eps) {
+        double mid = (low + high) / 2.0; 
+        if(find(mid, n) < m) {
+            low = mid; 
+        }
+        else {
+            high = mid; 
+        }
+    }
+        
+       return  Double.parseDouble(String.format("%.6f",low));
+         }
+}
+
+Tc-O(N*logm)
+Sc-O(1)
